@@ -19,6 +19,8 @@ class Plugin {
     public function __construct() {
 
         require_once( WP_FIELDS_PATH . 'modules/admin/AdminMenu.php' );
+        require_once( WP_FIELDS_PATH . 'modules/utility/PostTypeFetch.php' );
+
         new \WP_Fields\Admin\AdminMenu();
 
     }

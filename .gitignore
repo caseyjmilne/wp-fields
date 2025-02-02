@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+
+# Build outputs
+/dist/
+/build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependency directories for npm/yarn
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# React build folder
+/modules/admin/app/build/

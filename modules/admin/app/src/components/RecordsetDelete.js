@@ -26,7 +26,6 @@ function RecordsetDelete() {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        // Add authentication if required
         'X-WP-Nonce': window.wpApiSettings.nonce,
       },
     })

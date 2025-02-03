@@ -16,26 +16,6 @@ function ListRecordsets() {
       .catch(() => setError('Failed to load recordsets'));
   }, []);
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this recordset?')) {
-      // Perform the DELETE request to the API
-      fetch(`http://cjm.local/wp-json/wp-fields/v1/recordsets/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Remove the deleted recordset from the list
-          setRecordsets((prevRecordsets) =>
-            prevRecordsets.filter((recordset) => recordset.id !== id)
-          );
-        })
-        .catch(() => setError('Failed to delete recordset'));
-    }
-  };
-
   if (error) {
     return <div style={{ color: 'red' }}>{error}</div>;
   }
@@ -68,14 +48,10 @@ function ListRecordsets() {
                   Edit
                 </Link>
                 &nbsp;|&nbsp;
-                {/* Delete Button */}
-                <button
-                  onClick={() => handleDelete(recordset.id)}
-                  className="delete-btn"
-                  style={{ color: 'red' }}
-                >
+                {/* Delete Confirmation Link */}
+                <Link to={`/recordsets/delete/${recordset.id}`} className="delete-link">
                   Delete
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

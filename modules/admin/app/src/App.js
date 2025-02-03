@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import ListRecordsets from './components/ListRecordsets';
 import RecordsetCreate from './components/RecordsetCreate';
 import RecordsetEdit from './components/RecordsetEdit';
+import RecordsetDelete from './components/RecordsetDelete';
 import './main.css';
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
             <Route path="/" element={<h2>Welcome to the App!</h2>} />
             <Route path="/recordsets" element={<ListRecordsets />} />
             <Route path="/recordsets/create" element={<RecordsetCreate />} />
-            <Route path="/recordsets/edit/:id" element={<RecordsetEdit />} /> {/* New Edit Route */}
+            <Route path="/recordsets/edit/:id" element={<RecordsetEdit />} />
+            <Route path="/recordsets/delete/:id" element={<RecordsetDelete />} />
           </Routes>
         </main>
       </div>

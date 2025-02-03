@@ -2,7 +2,7 @@
 
 namespace WP_Fields\Admin;
 
-use WP_Fields\Utility\PostTypeFetch; // Import the PostTypeFetch class
+use WP_Fields\Utility\PostTypeFetch;
 
 class AdminMenu {
 

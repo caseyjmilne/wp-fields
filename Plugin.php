@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  * Plugin Name: WP Fields
@@ -18,13 +18,28 @@ class Plugin {
 
     public function __construct() {
 
+        // Require PHP classes.
         require_once( WP_FIELDS_PATH . 'modules/admin/AdminMenu.php' );
+        require_once( WP_FIELDS_PATH . 'modules/admin/AdminScripts.php' );
+        require_once( WP_FIELDS_PATH . 'modules/activation/Activate.php' );
         require_once( WP_FIELDS_PATH . 'modules/utility/PostTypeFetch.php' );
 
+        // Initiate classes that have constructor initiation hooks.
         new \WP_Fields\Admin\AdminMenu();
+        new \WP_Fields\Admin\AdminScripts();
+    }
 
+    // This method will be called on plugin activation
+    public static function activate() {
+
+        $activation = new \WP_Fields\Activation\Activate();
+        $activation->create_table();
+        
     }
 
 }
+
+// Register the activation hook
+register_activation_hook( __FILE__, [ 'WP_Fields\Plugin', 'activate' ] );
 
 new Plugin();

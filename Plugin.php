@@ -28,12 +28,14 @@ class Plugin {
         require_once( WP_FIELDS_PATH . 'modules/api/RecordsetModel.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/FieldApi.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/FieldModel.php' );
+        require_once( WP_FIELDS_PATH . 'modules/metabox/FieldsMetabox.php' );
 
         // Initiate classes that have constructor initiation hooks.
         new \WP_Fields\Admin\AdminMenu();
         new \WP_Fields\Admin\AdminScripts();
         new \WP_Fields\Api\RecordsetApi();
         new \WP_Fields\Api\FieldApi();
+        new \WP_Fields\Metabox\FieldsMetabox();
 
     }
 

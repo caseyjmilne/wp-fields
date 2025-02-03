@@ -23,20 +23,25 @@ class Plugin {
         require_once( WP_FIELDS_PATH . 'modules/admin/AdminScripts.php' );
         require_once( WP_FIELDS_PATH . 'modules/activation/Activate.php' );
         require_once( WP_FIELDS_PATH . 'modules/utility/PostTypeFetch.php' );
+        require_once( WP_FIELDS_PATH . 'modules/utility/LoadFields.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/RecordsetApi.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/RecordsetModel.php' );
+        require_once( WP_FIELDS_PATH . 'modules/api/FieldApi.php' );
+        require_once( WP_FIELDS_PATH . 'modules/api/FieldModel.php' );
 
         // Initiate classes that have constructor initiation hooks.
         new \WP_Fields\Admin\AdminMenu();
         new \WP_Fields\Admin\AdminScripts();
         new \WP_Fields\Api\RecordsetApi();
+        new \WP_Fields\Api\FieldApi();
+
     }
 
     // This method will be called on plugin activation
     public static function activate() {
 
         $activation = new \WP_Fields\Activation\Activate();
-        $activation->create_table();
+        $activation->run();
         
     }
 

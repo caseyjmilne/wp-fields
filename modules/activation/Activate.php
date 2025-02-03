@@ -4,13 +4,8 @@ namespace WP_Fields\Activation;
 
 class Activate {
 
-    // Constructor to register the activation hook
-    public function __construct() {
-        register_activation_hook(__FILE__, [$this, 'activate']);
-    }
-
     // This method is called on plugin activation
-    public function activate() {
+    public function run() {
         $this->create_table_recordsets();
         $this->create_table_fields();
     }

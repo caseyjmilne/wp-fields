@@ -1,0 +1,25 @@
+.wpf-app {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 16px;
+}
+
+.wpf-app-nav {
+    background-color: black;
+    padding: 8px 16px;
+}
+
+.wpf-app-nav__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.wpf-app-nav__link {
+    color: white; 
+    text-decoration: none;
+    font-weight: 600;
+}

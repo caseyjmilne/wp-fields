@@ -60,21 +60,22 @@ class RecordsetModel {
     }
 
     // Update an existing recordset
-    public function update_recordset($id, $post_type, $position) {
+    public function update_recordset( $id, $position ) {
+
         global $wpdb;
 
         // Update the recordset in the database
         $result = $wpdb->update(
             $this->table_name,
             [
-                'post_type' => sanitize_text_field($post_type),
                 'position'  => intval($position),
                 'updated'   => current_time('mysql'),
             ],
-            ['id' => intval($id)] // Update by ID
+            ['id' => intval($id)]
         );
 
-        return $result !== false; // Return whether the update was successful
+        return $result !== false;
+
     }
 
     // Delete a recordset

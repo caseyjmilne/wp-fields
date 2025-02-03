@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function ListRecordsets() {
+function RecordsetList() {
   const [recordsets, setRecordsets] = useState([]);
   const [error, setError] = useState(null);
 
@@ -43,6 +43,10 @@ function ListRecordsets() {
               <td>{recordset.post_type}</td>
               <td>{recordset.position}</td>
               <td>
+                {/* Manage Link */}
+                <Link to={`/recordsets/edit/${recordset.id}/fields`} className="edit-link">
+                  Manage Fields
+                </Link>
                 {/* Edit Link */}
                 <Link to={`/recordsets/edit/${recordset.id}`} className="edit-link">
                   Edit
@@ -61,4 +65,4 @@ function ListRecordsets() {
   );
 }
 
-export default ListRecordsets;
+export default RecordsetList;

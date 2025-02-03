@@ -33,6 +33,7 @@ function RecordsetEdit() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'X-WP-Nonce': window.wpApiSettings.nonce, // Include the nonce for authentication
       },
       body: JSON.stringify({ position }),
     })

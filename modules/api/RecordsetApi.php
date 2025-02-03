@@ -115,16 +115,16 @@ class RecordsetApi {
 
     // Update an existing recordset
     public function update_recordset(\WP_REST_Request $request) {
+
         $id = $request->get_param('id');
-        $post_type = sanitize_text_field($request->get_param('post_type'));
         $position = intval($request->get_param('position'));
 
-        if (!$id || !$post_type || !$position) {
-            return new \WP_Error('invalid_data', 'ID, post type, and position are required', ['status' => 400]);
+        if ( !$position ) {
+            return new \WP_Error('invalid_data', 'Position is required', ['status' => 400]);
         }
 
         $recordset_db = new RecordsetModel();
-        $updated = $recordset_db->update_recordset($id, $post_type, $position);
+        $updated = $recordset_db->update_recordset( $id, $position );
 
         if ($updated) {
             return rest_ensure_response(['message' => 'Recordset updated successfully']);

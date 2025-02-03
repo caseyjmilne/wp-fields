@@ -27,9 +27,5 @@ class AdminMenu {
 
     public function render_react_app() {
         echo '<div id="wp-fields-app"></div>';
-
-        // Test output for the PostTypeFetch utility class
-        echo '<h2>Test: Post Type Dropdown</h2>';
-        $this->postTypeFetch->render();
     }
 }

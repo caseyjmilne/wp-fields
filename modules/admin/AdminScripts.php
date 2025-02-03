@@ -39,6 +39,11 @@ class AdminScripts {
             true
         );
 
+        // Localize script to pass nonce
+        wp_localize_script('wp-fields-admin-app', 'wpApiSettings', array(
+            'nonce' => wp_create_nonce('wp_rest') // This generates the nonce for REST API
+        ));
+
         // Enqueue React app CSS
         wp_enqueue_style(
             'wp-fields-admin-app',
@@ -46,5 +51,6 @@ class AdminScripts {
             [],
             WP_FIELDS_VERSION
         );
+
     }
 }

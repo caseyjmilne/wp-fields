@@ -23,10 +23,13 @@ class Plugin {
         require_once( WP_FIELDS_PATH . 'modules/admin/AdminScripts.php' );
         require_once( WP_FIELDS_PATH . 'modules/activation/Activate.php' );
         require_once( WP_FIELDS_PATH . 'modules/utility/PostTypeFetch.php' );
+        require_once( WP_FIELDS_PATH . 'modules/api/RecordsetApi.php' );
+        require_once( WP_FIELDS_PATH . 'modules/api/RecordsetModel.php' );
 
         // Initiate classes that have constructor initiation hooks.
         new \WP_Fields\Admin\AdminMenu();
         new \WP_Fields\Admin\AdminScripts();
+        new \WP_Fields\Api\RecordsetApi();
     }
 
     // This method will be called on plugin activation

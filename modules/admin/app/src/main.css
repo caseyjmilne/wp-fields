@@ -1,4 +1,17 @@
 .wpf-app {
+    font-family: 'Inter', sans-serif;
+    margin-left: -20px;
+}
+
+.wpf-app-header {
+    background-color: #111;
+    color: #F8F8F8;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+}
+
+.wpf-app-body {
     display: grid;
     grid-template-columns: 240px 1fr;
     gap: 16px;
@@ -22,4 +35,18 @@
     color: white; 
     text-decoration: none;
     font-weight: 600;
+}
+
+.wpf-control-button-group {
+    display: flex;
+    gap: 12px;
+    background: #F4F4F4;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.wpf-control-button {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
 }

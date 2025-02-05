@@ -2,7 +2,8 @@
 
 namespace WP_Fields\Api;
 
-use WP_Fields\Api\FieldModel; // Include the database operations class.
+use WP_Fields\Api\FieldModel;
+use WP_Fields\Utility\DatabaseOperations;
 
 class FieldApi {
 
@@ -83,6 +84,13 @@ class FieldApi {
 
         $field_db = new FieldModel();
         $field_id = $field_db->create_field($recordset_id, $name, $type, $position);
+
+        // Update user database table.
+        $do = new DatabaseOperations();
+        $table_result = $do->tableRefresh( $recordset_id, 'wp_field_page_0' );
+        if( $table_result !== 'refreshed' ) {
+            return new \WP_Error('table_refresh_failed', 'Failed to refresh database table.' . $table_result, ['status' => 500]);
+        }
 
         if ($field_id) {
             return rest_ensure_response(['id' => $field_id, 'message' => 'Field created successfully']);

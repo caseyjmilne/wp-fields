@@ -85,28 +85,15 @@ class RecordsetApi {
 
         // If the recordset creation is successful, create the table
         if ($recordset_id) {
-            // Generate the table name based on the naming convention
-            global $wpdb;
-            $table_name = $wpdb->prefix . "field_" . sanitize_key($post_type) . "_" . $position;
 
-            // Check if the table already exists
-            $table_exists = $wpdb->get_var("SHOW TABLES LIKE '{$table_name}'");
+            $do = new \WP_Fields\Utility\DatabaseOperations;
 
-            if ($table_exists) {
-                return rest_ensure_response(['id' => $recordset_id, 'message' => 'Recordset created successfully, table already exists.']);
+            $result = $do->tableCreate( $post_type, $position );
+
+            if( $result === 'exists' ) {
+                rest_ensure_response(['id' => $recordset_id, 'message' => 'Recordset created successfully, table already exists.']);
             }
-
-            // Create the table for the recordset (empty for now)
-            $charset_collate = $wpdb->get_charset_collate();
-            $sql = "CREATE TABLE {$table_name} (
-                id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (id)
-            ) $charset_collate;";
-
-            // Include WordPress database upgrade function
-            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-            dbDelta($sql);
-
+            
             return rest_ensure_response(['id' => $recordset_id, 'message' => 'Recordset and empty table created successfully']);
         }
 
@@ -135,19 +122,42 @@ class RecordsetApi {
 
     // Delete a recordset
     public function delete_recordset(\WP_REST_Request $request) {
+
         $id = $request->get_param('id');
 
         if (!$id) {
             return new \WP_Error('invalid_id', 'ID is required', ['status' => 400]);
         }
 
+        // Delete the recordset from the database
         $recordset_db = new RecordsetModel();
+        $recordset = $recordset_db->get_recordset($id);
+
+        if (empty($recordset)) {
+            return new \WP_Error('no_recordset', 'Recordset not found', ['status' => 404]);
+        }
+
+        // Call tableDrop to remove the associated table
+        $post_type = $recordset->post_type;  // Assuming the 'post_type' is stored in the recordset
+        $position = $recordset->position;    // Assuming the 'position' is stored in the recordset
+
+        // Initialize the DatabaseOperations class to drop the table
+        $do = new \WP_Fields\Utility\DatabaseOperations;
+        $result = $do->tableDrop($post_type, $position);
+
+        if ($result === 'not_exists') {
+            return new \WP_Error('table_not_found', 'The associated table does not exist', ['status' => 404]);
+        }
+
+        // Proceed with deleting the recordset
         $deleted = $recordset_db->delete_recordset($id);
 
         if ($deleted) {
-            return rest_ensure_response(['message' => 'Recordset deleted successfully']);
+            return rest_ensure_response(['message' => 'Recordset and associated table deleted successfully']);
         }
 
         return new \WP_Error('delete_failed', 'Failed to delete recordset', ['status' => 500]);
+
     }
+
 }

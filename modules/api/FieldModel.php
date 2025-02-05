@@ -39,14 +39,16 @@ class FieldModel {
 
     // Get all fields (optionally filter by recordset_id)
     public function get_fields($recordset_id = null) {
+        
         global $wpdb;
 
         if ($recordset_id) {
             $query = $wpdb->prepare("SELECT * FROM {$this->table_name} WHERE recordset_id = %d ORDER BY position ASC", $recordset_id);
-            return $wpdb->get_results($query, ARRAY_A);
+            return $wpdb->get_results($query);
         }
 
-        return $wpdb->get_results("SELECT * FROM {$this->table_name} ORDER BY recordset_id, position ASC", ARRAY_A);
+        return $wpdb->get_results("SELECT * FROM {$this->table_name} ORDER BY recordset_id, position ASC");
+    
     }
 
     // Get a single field by ID

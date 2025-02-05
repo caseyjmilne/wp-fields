@@ -24,6 +24,7 @@ class Plugin {
         require_once( WP_FIELDS_PATH . 'modules/activation/Activate.php' );
         require_once( WP_FIELDS_PATH . 'modules/utility/PostTypeFetch.php' );
         require_once( WP_FIELDS_PATH . 'modules/utility/LoadFields.php' );
+        require_once( WP_FIELDS_PATH . 'modules/utility/DatabaseOperations.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/RecordsetApi.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/RecordsetModel.php' );
         require_once( WP_FIELDS_PATH . 'modules/api/FieldApi.php' );
